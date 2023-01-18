@@ -8,7 +8,7 @@ from nltk.corpus import stopwords
 
 
 #read csv file
-with open('tweets_ronaldo.csv', mode="r") as csv_file: #"r" represents the read mode
+with open('tweets_ronaldo_50000.csv', mode="r") as csv_file: #"r" represents the read mode
     reader = csv.reader(csv_file) #this is the reader object
     tweets =[]
     for item in reader:
@@ -17,8 +17,8 @@ with open('tweets_ronaldo.csv', mode="r") as csv_file: #"r" represents the read 
 #preprocess text to remove stop words, punctuation, links and so on
 
 print(tweets[:10])
-results = [clean_tweet(tw) for tw in tweets]
-results = [word for line in results for word in line.split()]
+results = [clean_tweet(tw) for tw in tweets] #get list of preprocessed tweets
+results = [word for line in results for word in line.split()]  #get list of words
 print("***********************************************************************************************************************************************************************")
 print(results[:10])
 
@@ -33,7 +33,7 @@ plt.figure(figsize=(15,8))
 plt.imshow(wordcloud, interpolation='bilInear')
 plt.axis("off")
 #plt.show()
-plt.savefig('ronaldo_wordcloud.png', bbox_inches='tight')
+plt.savefig('ronaldo_wordcloud_50000.png', bbox_inches='tight')
 plt.close()
 
 quit();

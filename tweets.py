@@ -7,7 +7,7 @@ import pandas as pd
 # query = "(from:elonmusk) until:2020-01-01 since:2010-01-01"
 query = "ronaldo lang:en until:2022-12-20 since:2022-11-1"
 tweets = []
-limit = 5000
+limit = 50000
 
 
 for tweet in sntwitter.TwitterSearchScraper(query).get_items():
@@ -24,4 +24,4 @@ df = pd.DataFrame(tweets, columns=['Tweet'])
 print(df)
 
 # to save to csv
-df.to_csv('tweets_ronaldo.csv')
+df.to_csv('tweets_ronaldo_50000.csv')
