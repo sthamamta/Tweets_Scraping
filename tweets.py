@@ -17,9 +17,10 @@ for tweet in sntwitter.TwitterSearchScraper(query).get_items():
     if len(tweets) == limit:
         break
     else:
-        tweets.append([tweet.date, tweet.user.username, tweet.content])
+        # tweets.append([tweet.date, tweet.user.username, tweet.content])
+        tweets.append([tweet.content])
         
-df = pd.DataFrame(tweets, columns=['Date', 'User', 'Tweet'])
+df = pd.DataFrame(tweets, columns=['Tweet'])
 print(df)
 
 # to save to csv
