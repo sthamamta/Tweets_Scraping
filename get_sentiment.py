@@ -27,7 +27,7 @@ def sentiment_analysis(tweet):
 
 
 #read csv file
-with open('tweets_ronaldo.csv', mode="r") as csv_file: #"r" represents the read mode
+with open('tweets_ronaldo_50.csv', mode="r") as csv_file: #"r" represents the read mode
     reader = csv.reader(csv_file) #this is the reader object
     tweets =[]
     for item in reader:
@@ -50,9 +50,43 @@ print(result)
 
 
 sentiment =  SentimentIntensityAnalyzer()
-text_1 = results[25]
-sent_1 =  sentiment.polarity_scores(text_1)
-print("Sentiment of text 1:", sent_1)
+# text_1 = results[25]
+# sent_1 =  sentiment.polarity_scores(text_1)
+# print("Sentiment of text 1:", sent_1)
+
+def get_maximum_key(d):
+  return max(d, key = d.get)
+
+# read the csv file containing tweets and get sentiment of each row and add its value to new column
+
+sentiments_labels = {'neg': 'NEGATIVE','neu':'NEUTRAL','pos':'POSITIVE','compound':'COMPOUND'}
+
+with open('tweets_ronaldo_50.csv','r') as csvinput:
+    with open('output.csv', 'w') as csvoutput:
+        writer = csv.writer(csvoutput, lineterminator='\n')
+        reader = csv.reader(csvinput)
+
+        all = []
+        row = next(reader)
+        
+        row.append('Sentiment')
+        row.append('Stance')
+        all.append(row)
+
+        for row in reader:
+            # print("The tweet for sentiment",row[1])
+            row[1] = clean_tweet(row[1])
+            sentiment_polarity = sentiment.polarity_scores(row[0])
+            print("Tweet is ::: ", row[1])
+            stance = input("Enter your stance: Ronaldo is better than messi ")
+            sentiment_value = get_maximum_key(sentiment_polarity)
+            row.append(sentiments_labels[sentiment_value])
+            row.append(stance)
+            all.append(row)
+
+        writer.writerows(all)
+
+
 
 
 

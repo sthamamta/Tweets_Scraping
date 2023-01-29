@@ -5,9 +5,9 @@ import snscrape.modules.twitter as sntwitter
 import pandas as pd
 
 # query = "(from:elonmusk) until:2020-01-01 since:2010-01-01"
-query = "ronaldo lang:en until:2022-12-20 since:2022-11-1"
+query = "messi lang:en until:2022-12-20 since:2022-11-1"
 tweets = []
-limit = 50000
+limit = 25
 
 
 for tweet in sntwitter.TwitterSearchScraper(query).get_items():
@@ -20,8 +20,8 @@ for tweet in sntwitter.TwitterSearchScraper(query).get_items():
         # tweets.append([tweet.date, tweet.user.username, tweet.content])
         tweets.append([tweet.content])
         
-df = pd.DataFrame(tweets, columns=['Tweet'])
+df = pd.DataFrame(tweets, columns=['Original Tweet'])
 print(df)
 
 # to save to csv
-df.to_csv('tweets_ronaldo_50000.csv')
+df.to_csv('tweets_messi_25.csv')
